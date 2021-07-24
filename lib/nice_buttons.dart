@@ -35,6 +35,8 @@ class NiceButtons extends StatefulWidget {
   /// Width of the button defaults to 200, its useless if the stretch property is set to true.
   final double width;
 
+  final bool progress;
+
   Widget child;
   BorderRadius br;
   double calculatedWidth;
@@ -49,6 +51,7 @@ class NiceButtons extends StatefulWidget {
       this.width = 200,
       this.gradientOrientation = GradientOrientation.Vertical,
       this.stretch = true,
+      this.progress = false,
       this.child}) {
     this.br = BorderRadius.all(Radius.circular((this.borderRadius)));
     if (this.stretch) {
@@ -59,27 +62,46 @@ class NiceButtons extends StatefulWidget {
   }
 
   @override
-  _NiceButtonsState createState() => _NiceButtonsState();
+  _NiceButtonsState createState() => _NiceButtonsState(borderThickness);
 }
 
 class _NiceButtonsState extends State<NiceButtons> {
+  double _borderThickness;
+  double _moveMargin = 0.0;
+
+  _NiceButtonsState(double borderThickness) {
+    this._borderThickness = borderThickness;
+  }
+
   Widget _buildBackLayout() {
-    return DecoratedBox(
-      position: DecorationPosition.background,
-      decoration: BoxDecoration(
-        borderRadius: widget.br,
-        color: widget.borderColor,
-      ),
-      child: ConstrainedBox(
-        constraints: BoxConstraints.expand(
-            width: double.infinity, height: double.infinity),
+    return Container(
+      padding: EdgeInsets.only(top: _borderThickness),
+      width: double.infinity,
+      height: double.infinity,
+      child: DecoratedBox(
+        position: DecorationPosition.background,
+        decoration: BoxDecoration(
+          borderRadius: widget.br,
+          color: widget.borderColor,
+        ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints.expand(
+              width: double.infinity, height: double.infinity),
+        ),
       ),
     );
   }
 
-  Widget _buildMiddleLayout() {
-    return DecoratedBox(
-      position: DecorationPosition.background,
+  Widget _buildFrontLayout() {
+    return AnimatedContainer(
+      onEnd: () {
+        setState(() {
+          _moveMargin = 0;
+        });
+      },
+      margin: EdgeInsets.only(top: _moveMargin),
+      duration: Duration(milliseconds: 150),
+      curve: Curves.easeInOut,
       decoration: BoxDecoration(
         borderRadius: widget.br,
         gradient: LinearGradient(
@@ -97,31 +119,34 @@ class _NiceButtonsState extends State<NiceButtons> {
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints.expand(
-            width: double.infinity,
-            height: widget.height - widget.borderThickness),
+            width: double.infinity, height: widget.height - _borderThickness),
+        child: Align(
+          alignment: Alignment.center,
+          child: widget.child != null ? widget.child : Text(''),
+        ),
       ),
-    );
-  }
-
-  Widget _buildFrontLayout() {
-    return Align(
-      alignment: Alignment.center,
-      child: widget.child != null ? widget.child : Text(''),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ConstrainedBox(
-        constraints: BoxConstraints.expand(
-            width: widget.calculatedWidth, height: widget.height),
-        child: Stack(
-          children: <Widget>[
-            _buildBackLayout(),
-            _buildMiddleLayout(),
-            _buildFrontLayout(),
-          ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          print('Tapped');
+          _moveMargin = _borderThickness;
+        });
+      },
+      child: Container(
+        child: ConstrainedBox(
+          constraints: BoxConstraints.expand(
+              width: widget.calculatedWidth, height: widget.height),
+          child: Stack(
+            children: <Widget>[
+              _buildBackLayout(),
+              _buildFrontLayout(),
+            ],
+          ),
         ),
       ),
     );
