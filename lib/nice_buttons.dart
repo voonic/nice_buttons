@@ -17,6 +17,12 @@ class NiceButtons extends StatefulWidget {
   /// The color of the 3D border.
   final Color borderColor;
 
+  /// The color of circular progress indicator, defaults to white
+  final Color progressColor;
+
+  /// The size of progress indicator circle, defaults to 20
+  final double progressSize;
+
   /// Orientation of the gradient defaults to Horizontal.
   final GradientOrientation gradientOrientation;
 
@@ -45,6 +51,8 @@ class NiceButtons extends StatefulWidget {
       {this.startColor = const Color(0xFF2ec8ff),
       this.endColor = const Color(0xFF529fff),
       this.borderColor = const Color(0xFF3489e9),
+      this.progressColor = Colors.white,
+      this.progressSize = 20,
       this.borderRadius = 20,
       this.borderThickness = 5,
       this.height = 60,
@@ -68,6 +76,8 @@ class NiceButtons extends StatefulWidget {
 class _NiceButtonsState extends State<NiceButtons> {
   double _borderThickness;
   double _moveMargin = 0.0;
+  double _progressWidth = 0.0;
+  bool _showProgress = false;
 
   _NiceButtonsState(double borderThickness) {
     this._borderThickness = borderThickness;
@@ -97,6 +107,10 @@ class _NiceButtonsState extends State<NiceButtons> {
       onEnd: () {
         setState(() {
           _moveMargin = 0;
+          if (widget.progress == true && _showProgress == false) {
+            _showProgress = true;
+            _progressWidth = double.infinity;
+          }
         });
       },
       margin: EdgeInsets.only(top: _moveMargin),
@@ -120,11 +134,48 @@ class _NiceButtonsState extends State<NiceButtons> {
       child: ConstrainedBox(
         constraints: BoxConstraints.expand(
             width: double.infinity, height: widget.height - _borderThickness),
-        child: Align(
-          alignment: Alignment.center,
-          child: widget.child != null ? widget.child : Text(''),
+        child: Stack(
+          children: <Widget>[
+            _buildProgressBar(),
+            if (_showProgress == true) _buildProgressCircle(),
+            if (_showProgress == false) _buildUserChild(),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildProgressBar() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 2000),
+      curve: Curves.fastLinearToSlowEaseIn,
+      width: _progressWidth,
+      height: double.infinity,
+      color: new Color.fromARGB(50, 255, 255, 255),
+    );
+  }
+
+  Widget _buildProgressCircle() {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Align(
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: widget.progressSize,
+          height: widget.progressSize,
+          child: CircularProgressIndicator(
+              valueColor:
+                  new AlwaysStoppedAnimation<Color>(widget.progressColor)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserChild() {
+    return Align(
+      alignment: Alignment.center,
+      child: widget.child != null ? widget.child : Text(''),
     );
   }
 
@@ -133,7 +184,6 @@ class _NiceButtonsState extends State<NiceButtons> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          print('Tapped');
           _moveMargin = _borderThickness;
         });
       },

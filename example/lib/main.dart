@@ -97,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
             NiceButtons(
               stretch: false,
               borderRadius: 20,
+              progress: true,
               gradientOrientation: GradientOrientation.Horizontal,
               child: Text(
                 'Nice Buttons',
