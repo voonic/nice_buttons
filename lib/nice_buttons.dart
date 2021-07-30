@@ -41,7 +41,11 @@ class NiceButtons extends StatefulWidget {
   /// Width of the button defaults to 200, its useless if the stretch property is set to true.
   final double width;
 
+  /// Whether the progress indicator is required or not, defaults to false
   final bool progress;
+
+  /// Disables the button, defaults to false
+  final bool disabled;
 
   Widget child;
   BorderRadius br;
@@ -60,6 +64,7 @@ class NiceButtons extends StatefulWidget {
       this.gradientOrientation = GradientOrientation.Vertical,
       this.stretch = true,
       this.progress = false,
+      this.disabled = false,
       this.child}) {
     this.br = BorderRadius.all(Radius.circular((this.borderRadius)));
     if (this.stretch) {
@@ -73,11 +78,13 @@ class NiceButtons extends StatefulWidget {
   _NiceButtonsState createState() => _NiceButtonsState(borderThickness);
 }
 
-class _NiceButtonsState extends State<NiceButtons> {
+class _NiceButtonsState extends State<NiceButtons>
+    with TickerProviderStateMixin {
   double _borderThickness;
   double _moveMargin = 0.0;
   double _progressWidth = 0.0;
   bool _showProgress = false;
+  bool _tapped = false;
 
   _NiceButtonsState(double borderThickness) {
     this._borderThickness = borderThickness;
@@ -107,10 +114,11 @@ class _NiceButtonsState extends State<NiceButtons> {
       onEnd: () {
         setState(() {
           _moveMargin = 0;
-          if (widget.progress == true && _showProgress == false) {
+          if (widget.progress && !_showProgress && _tapped) {
             _showProgress = true;
             _progressWidth = double.infinity;
           }
+          _tapped = false;
         });
       },
       margin: EdgeInsets.only(top: _moveMargin),
@@ -134,24 +142,30 @@ class _NiceButtonsState extends State<NiceButtons> {
       child: ConstrainedBox(
         constraints: BoxConstraints.expand(
             width: double.infinity, height: widget.height - _borderThickness),
-        child: Stack(
-          children: <Widget>[
-            _buildProgressBar(),
-            if (_showProgress == true) _buildProgressCircle(),
-            if (_showProgress == false) _buildUserChild(),
-          ],
+        child: ClipRRect(
+          borderRadius: widget.br,
+          child: Stack(
+            children: <Widget>[
+              _buildProgressBar(),
+              if (_showProgress) _buildProgressCircle(),
+              if (!_showProgress) _buildUserChild(),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildProgressBar() {
-    return AnimatedContainer(
+    return AnimatedSize(
+      vsync: this,
       duration: Duration(milliseconds: 2000),
-      curve: Curves.fastLinearToSlowEaseIn,
-      width: _progressWidth,
-      height: double.infinity,
-      color: new Color.fromARGB(50, 255, 255, 255),
+      curve: Curves.fastOutSlowIn,
+      child: Container(
+        width: _progressWidth,
+        height: double.infinity,
+        color: new Color.fromARGB(60, 255, 255, 255),
+      ),
     );
   }
 
@@ -185,6 +199,7 @@ class _NiceButtonsState extends State<NiceButtons> {
       onTap: () {
         setState(() {
           _moveMargin = _borderThickness;
+          _tapped = true;
         });
       },
       child: Container(

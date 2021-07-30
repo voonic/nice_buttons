@@ -95,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             NiceButtons(
-              stretch: false,
-              borderRadius: 20,
+              stretch: _counter % 2 == 0 ? true : false,
+              borderRadius: _counter % 2 == 0 ? 20 : 40,
               progress: true,
               gradientOrientation: GradientOrientation.Horizontal,
               child: Text(
@@ -107,11 +107,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
