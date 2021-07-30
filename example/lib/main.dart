@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nice_buttons/nice_buttons.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -99,6 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
               borderRadius: _counter % 2 == 0 ? 20 : 40,
               progress: true,
               gradientOrientation: GradientOrientation.Horizontal,
+              onTap: (finish) {
+                print('On tap called');
+                var timer = Timer(Duration(seconds: 5), () {
+                  finish();
+                });
+              },
               child: Text(
                 'Nice Buttons',
                 style: TextStyle(color: Colors.white, fontSize: 18),

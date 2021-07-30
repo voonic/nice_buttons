@@ -47,12 +47,16 @@ class NiceButtons extends StatefulWidget {
   /// Disables the button, defaults to false
   final bool disabled;
 
-  Widget child;
-  BorderRadius br;
-  double calculatedWidth;
+  ///button press handler, required
+  final Function onTap;
+
+  Widget? child;
+  BorderRadius? br;
+  double? calculatedWidth;
 
   NiceButtons(
-      {this.startColor = const Color(0xFF2ec8ff),
+      {required this.onTap,
+      this.startColor = const Color(0xFF2ec8ff),
       this.endColor = const Color(0xFF529fff),
       this.borderColor = const Color(0xFF3489e9),
       this.progressColor = Colors.white,
@@ -80,11 +84,12 @@ class NiceButtons extends StatefulWidget {
 
 class _NiceButtonsState extends State<NiceButtons>
     with TickerProviderStateMixin {
-  double _borderThickness;
+  double _borderThickness = 5;
   double _moveMargin = 0.0;
   double _progressWidth = 0.0;
   bool _showProgress = false;
   bool _tapped = false;
+  bool _processing = false;
 
   _NiceButtonsState(double borderThickness) {
     this._borderThickness = borderThickness;
@@ -117,6 +122,7 @@ class _NiceButtonsState extends State<NiceButtons>
           if (widget.progress && !_showProgress && _tapped) {
             _showProgress = true;
             _progressWidth = double.infinity;
+            _processing = true;
           }
           _tapped = false;
         });
@@ -159,7 +165,7 @@ class _NiceButtonsState extends State<NiceButtons>
   Widget _buildProgressBar() {
     return AnimatedSize(
       vsync: this,
-      duration: Duration(milliseconds: 2000),
+      duration: Duration(milliseconds: 2500),
       curve: Curves.fastOutSlowIn,
       child: Container(
         width: _progressWidth,
@@ -193,15 +199,26 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  void _onTap() {
+    setState(() {
+      _moveMargin = _borderThickness;
+      _tapped = true;
+    });
+    widget.onTap(_finish);
+  }
+
+  void _finish() {
+    setState(() {
+      _showProgress = false;
+      _progressWidth = 0;
+      _processing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          _moveMargin = _borderThickness;
-          _tapped = true;
-        });
-      },
+      onTap: widget.disabled || _processing ? null : _onTap,
       child: Container(
         child: ConstrainedBox(
           constraints: BoxConstraints.expand(
