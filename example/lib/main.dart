@@ -96,9 +96,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             NiceButtons(
-              stretch: _counter % 2 == 0 ? true : false,
-              borderRadius: _counter % 2 == 0 ? 20 : 40,
+              stretch: false,
               progress: true,
+              gradientOrientation: GradientOrientation.Horizontal,
+              onTap: (finish) {
+                print('On tap called');
+              },
+              child: Text(
+                'With Progress',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+            Container(width: double.infinity, height: 30),
+            NiceButtons(
+              stretch: false,
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
                 print('On tap called');
@@ -111,14 +122,51 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
+            Container(width: double.infinity, height: 30),
+            NiceButtons(
+              stretch: true,
+              gradientOrientation: GradientOrientation.Horizontal,
+              onTap: (finish) {
+                print('On tap called');
+              },
+              child: Text(
+                'Full Width',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+            Container(width: double.infinity, height: 30),
+            NiceButtons(
+              stretch: false,
+              borderRadius: 30,
+              gradientOrientation: GradientOrientation.Horizontal,
+              onTap: (finish) {
+                print('On tap called');
+              },
+              child: Text(
+                '3D Pill',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+            Container(width: double.infinity, height: 30),
+            NiceButtons(
+              stretch: false,
+              gradientOrientation: GradientOrientation.Vertical,
+              onTap: (finish) {
+                print('On tap called');
+              },
+              child: Text(
+                'Vertical Gradient',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
