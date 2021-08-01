@@ -90,6 +90,7 @@ class _NiceButtonsState extends State<NiceButtons>
   bool _showProgress = false;
   bool _tapped = false;
   bool _processing = false;
+  int _progressBarMillis = 2500;
 
   _NiceButtonsState(double borderThickness) {
     this._borderThickness = borderThickness;
@@ -123,6 +124,7 @@ class _NiceButtonsState extends State<NiceButtons>
             _showProgress = true;
             _progressWidth = double.infinity;
             _processing = true;
+            _progressBarMillis = 2500;
           }
           _tapped = false;
         });
@@ -165,7 +167,7 @@ class _NiceButtonsState extends State<NiceButtons>
   Widget _buildProgressBar() {
     return AnimatedSize(
       vsync: this,
-      duration: Duration(milliseconds: 2500),
+      duration: Duration(milliseconds: _progressBarMillis),
       curve: Curves.fastOutSlowIn,
       child: Container(
         width: _progressWidth,
@@ -212,6 +214,7 @@ class _NiceButtonsState extends State<NiceButtons>
       _showProgress = false;
       _progressWidth = 0;
       _processing = false;
+      _progressBarMillis = 1;
     });
   }
 
