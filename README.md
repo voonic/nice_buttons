@@ -1,6 +1,8 @@
 # nice_buttons
 `nice_buttons` a beautiful, animated, and customisable 3D button for your flutter project.
 
+![Sample Image](../example/nice_buttons.gif)
+
 ### Customisations
 
 | Attribute |    Type    |  Default  | Description  |
@@ -23,7 +25,7 @@
 
 ### Example
 
-`
+```
 NiceButtons(
   stretch: true,
   gradientOrientation: GradientOrientation.Horizontal,
@@ -35,5 +37,5 @@ NiceButtons(
     style: TextStyle(color: Colors.white, fontSize: 18),
   ),
 );
-`
+```
 Check example folder for more examples.
