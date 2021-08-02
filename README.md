@@ -1,7 +1,7 @@
 # nice_buttons
 `nice_buttons` a beautiful, animated, and customisable 3D button for your flutter project.
 
-![Sample Image](../example/nice_buttons.gif)
+![Sample Image](./example/nice_buttons.gif)
 
 ### Customisations
 
