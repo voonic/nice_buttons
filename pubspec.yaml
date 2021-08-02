@@ -1,7 +1,6 @@
 name: nice_buttons
-description: A nice, highly customisable, 3d animated buttons for your flutter project.
+description: A beautiful, animated, and customisable 3D button for your flutter project.
 version: 0.0.1
-author: Saket Kumar
 homepage: https://github.com/voonic/nice_buttons
 
 environment:
