@@ -3,6 +3,13 @@
 
 ![Sample Image](./example/nice_buttons.gif)
 
+## Installation
+Add it as a dependency in their `pubspec.yaml`:
+```
+dependencies:
+  nice_buttons: ^0.0.1
+```
+
 ### Customisations
 
 | Attribute |    Type    |  Default  | Description  |
