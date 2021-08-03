@@ -1,15 +1,15 @@
-# nice_buttons
+## nice_buttons
 `nice_buttons` a beautiful, animated, and customisable 3D button for your flutter project.
 
-## Platform Support
+### Platform Support
 
 | Android | iOS | Web |
 | :-----: | :-: | :---: |
-| ✔️  | ✔️  |  ✔️ |
+| &#9989;  | &#9989; | &#9989; |
 
 ![Sample Image](./example/nice_buttons.gif)
 
-## Installation
+### Installation
 Add it as a dependency in their `pubspec.yaml`:
 ```
 dependencies:
