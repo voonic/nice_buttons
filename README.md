@@ -36,7 +36,10 @@ dependencies:
 | `onTap` |  `Function`  |  | Button press handler, required* |
 | `child` |  `Widget`  |  | Inner content for the button, required* |
 
-### Example
+### Usage
+...
+import 'package:nice_buttons/nice_buttons.dart';
+...
 
 ```
 NiceButtons(
