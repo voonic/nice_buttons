@@ -37,9 +37,11 @@ dependencies:
 | `child` |  `Widget`  |  | Inner content for the button, required* |
 
 ### Usage
+`
 ...
 import 'package:nice_buttons/nice_buttons.dart';
 ...
+`
 
 ```
 NiceButtons(
