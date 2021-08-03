@@ -2,22 +2,24 @@ library nice_buttons;
 
 import 'package:flutter/material.dart';
 
+///Gradient settings enum, this can be used to change the direction of the color
+///gradients.
 enum GradientOrientation {
   Vertical,
   Horizontal,
 }
 
 class NiceButtons extends StatefulWidget {
-  /// The gradient start color.
+  /// The gradient start color for the button.
   final Color startColor;
 
-  /// The gradient start color.
+  /// The gradient end color for the button.
   final Color endColor;
 
-  /// The color of the 3D border.
+  /// The color of the 3D border of the button.
   final Color borderColor;
 
-  /// The color of circular progress indicator, defaults to white
+  /// The color of circular progress indicator, defaults to white.
   final Color progressColor;
 
   /// The size of progress indicator circle, defaults to 20
@@ -38,22 +40,30 @@ class NiceButtons extends StatefulWidget {
   /// whether to occupy the full available space in the parent, defaults to true.
   final bool stretch;
 
-  /// Width of the button defaults to 200, its useless if the stretch property is set to true.
+  /// Width of the button defaults to 200, its useless if the stretch property.
+  /// is set to true.
   final double width;
 
-  /// Whether the progress indicator is required or not, defaults to false
+  /// Whether the progress indicator is required or not, defaults to false.
   final bool progress;
 
-  /// Disables the button, defaults to false
+  /// Disables the button, defaults to false.
   final bool disabled;
 
-  ///button press handler, required
+  ///button on press handler, required.
   final Function onTap;
 
+  ///Child widget that will be wrapped inside the nice button.
   final Widget child;
+
+  ///The calculated border radius for the buttons.
   final BorderRadius br;
+
+  ///The calculated width of the button, set to parent width when
+  ///stretch property is set to true.
   final double calculatedWidth;
 
+  /// Setting the properties for the button.
   NiceButtons({
     required this.onTap,
     required this.child,
@@ -77,6 +87,7 @@ class NiceButtons extends StatefulWidget {
   _NiceButtonsState createState() => _NiceButtonsState(borderThickness);
 }
 
+/// Button state to keep track of press and progress animations.
 class _NiceButtonsState extends State<NiceButtons>
     with TickerProviderStateMixin {
   double _borderThickness = 5;
@@ -91,6 +102,7 @@ class _NiceButtonsState extends State<NiceButtons>
     this._borderThickness = borderThickness;
   }
 
+  ///The back view of the button that gives the feel of 3D border
   Widget _buildBackLayout() {
     return Container(
       padding: EdgeInsets.only(top: _borderThickness),
@@ -110,6 +122,8 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  ///The front view of the button, that has the user child widget content and
+  ///progress widget to show progress animation.
   Widget _buildFrontLayout() {
     return AnimatedContainer(
       onEnd: () {
@@ -159,6 +173,7 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  ///The progress widget.
   Widget _buildProgressBar() {
     return AnimatedSize(
       vsync: this,
@@ -172,6 +187,7 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  ///The progress circle widget.
   Widget _buildProgressCircle() {
     return Container(
       width: double.infinity,
@@ -189,6 +205,7 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  ///User provided child widget.
   Widget _buildUserChild() {
     return Align(
       alignment: Alignment.center,
@@ -197,6 +214,8 @@ class _NiceButtonsState extends State<NiceButtons>
     );
   }
 
+  ///The button press handler for the gesture detector. This will be triggered
+  ///when button is pressed.
   void _onTap() {
     setState(() {
       _moveMargin = _borderThickness;
@@ -205,6 +224,8 @@ class _NiceButtonsState extends State<NiceButtons>
     widget.onTap(_finish);
   }
 
+  ///The finish method that will reset the state of the animation, user
+  ///has to call this explicitly from the parent.
   void _finish() {
     setState(() {
       _showProgress = false;
@@ -214,6 +235,8 @@ class _NiceButtonsState extends State<NiceButtons>
     });
   }
 
+  ///The cumulative button widget that builds the front and back layout of the
+  ///nice button.
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
