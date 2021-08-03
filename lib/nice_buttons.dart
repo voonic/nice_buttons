@@ -192,7 +192,8 @@ class _NiceButtonsState extends State<NiceButtons>
   Widget _buildUserChild() {
     return Align(
       alignment: Alignment.center,
-      child: widget.child != null ? widget.child : Text(''),
+      //child: widget.child != null ? widget.child : Text(''),
+      child: widget.child,
     );
   }
 

@@ -88,6 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
                 print('On tap called');
+                Timer(Duration(seconds: 5), () {
+                  finish();
+                });
               },
               child: Text(
                 'With Progress',
@@ -100,9 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
                 print('On tap called');
-                Timer(Duration(seconds: 5), () {
-                  finish();
-                });
               },
               child: Text(
                 'Nice Buttons',
