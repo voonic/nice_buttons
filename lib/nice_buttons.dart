@@ -50,33 +50,28 @@ class NiceButtons extends StatefulWidget {
   ///button press handler, required
   final Function onTap;
 
-  Widget? child;
-  BorderRadius? br;
-  double? calculatedWidth;
+  final Widget child;
+  final BorderRadius br;
+  final double calculatedWidth;
 
-  NiceButtons(
-      {required this.onTap,
-      this.startColor = const Color(0xFF2ec8ff),
-      this.endColor = const Color(0xFF529fff),
-      this.borderColor = const Color(0xFF3489e9),
-      this.progressColor = Colors.white,
-      this.progressSize = 20,
-      this.borderRadius = 20,
-      this.borderThickness = 5,
-      this.height = 60,
-      this.width = 200,
-      this.gradientOrientation = GradientOrientation.Vertical,
-      this.stretch = true,
-      this.progress = false,
-      this.disabled = false,
-      this.child}) {
-    this.br = BorderRadius.all(Radius.circular((this.borderRadius)));
-    if (this.stretch) {
-      this.calculatedWidth = double.infinity;
-    } else {
-      this.calculatedWidth = this.width;
-    }
-  }
+  NiceButtons({
+    required this.onTap,
+    required this.child,
+    this.startColor = const Color(0xFF2ec8ff),
+    this.endColor = const Color(0xFF529fff),
+    this.borderColor = const Color(0xFF3489e9),
+    this.progressColor = Colors.white,
+    this.progressSize = 20,
+    this.borderRadius = 20,
+    this.borderThickness = 5,
+    this.height = 60,
+    this.width = 200,
+    this.gradientOrientation = GradientOrientation.Vertical,
+    this.stretch = true,
+    this.progress = false,
+    this.disabled = false,
+  })  : this.br = BorderRadius.all(Radius.circular((borderRadius))),
+        this.calculatedWidth = stretch ? double.infinity : width;
 
   @override
   _NiceButtonsState createState() => _NiceButtonsState(borderThickness);
