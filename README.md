@@ -1,5 +1,5 @@
 ## nice_buttons
-`nice_buttons` a beautiful, animated, and customisable 3D button for your flutter project.
+`nice_buttons` a beautiful, animated, and customizable 3D button for your flutter project.
 
 ### Platform Support
 
@@ -16,7 +16,7 @@ dependencies:
   nice_buttons: ^0.0.1
 ```
 
-### Customisations
+### Customizations
 
 | Attribute |    Type    |  Default  | Description  |
 | :-------- | :--------: | :-------: | :-------------------------------------------------------------------|
