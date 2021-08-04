@@ -1,5 +1,5 @@
 name: nice_buttons
-description: A beautiful, animated, and customizable 3D button for your flutter project with a built-in progress indicator and nice on press animations. Check the example code to see customizations available.
+description: A beautiful, animated, and customizable 3D button for your flutter project with a built-in progress indicator and nice on press animations.
 version: 0.0.1
 repository: https://github.com/voonic/nice_buttons
 homepage: https://encerge.com
