@@ -7,7 +7,7 @@
 | :-----: | :-: | :---: |
 | &#9989;  | &#9989; | &#9989; |
 
-![Sample Image](./example/nice_buttons.gif)
+![Sample Image](../main/example/nice_buttons.gif)
 
 ### Installation
 Add it as a dependency in their `pubspec.yaml`:
