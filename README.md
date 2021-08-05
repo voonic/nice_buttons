@@ -3,9 +3,9 @@
 
 ### Platform Support
 
-| Android | iOS | Web |
-| :-----: | :-: | :---: |
-| &#9989;  | &#9989; | &#9989; |
+| Android | iOS | Web | MacOS | Linux | Windows |
+| :-----: | :-: | :---: | :-----: | :-: | :---: |
+| &#9989;  | &#9989; | &#9989; | &#9989;  | &#9989; | &#9989; |
 
 ![Sample Image](../main/example/nice_buttons.gif)
 
