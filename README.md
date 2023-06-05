@@ -13,7 +13,7 @@
 Add it as a dependency in their `pubspec.yaml`:
 ```
 dependencies:
-  nice_buttons: ^0.0.2
+  nice_buttons: ^0.0.3
 ```
 
 ### Customizations

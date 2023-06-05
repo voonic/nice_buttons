@@ -177,7 +177,6 @@ class _NiceButtonsState extends State<NiceButtons>
   /// The progress widget.
   Widget _buildProgressBar() {
     return AnimatedSize(
-      vsync: this,
       duration: Duration(milliseconds: _progressBarMillis),
       curve: Curves.fastOutSlowIn,
       child: Container(
