@@ -53,7 +53,7 @@ class NiceButtons extends StatefulWidget {
   final bool disabled;
 
   /// Button on press handler, required.
-  final Function onTap;
+  final Function(void Function() finish) onTap;
 
   /// Child widget that will be wrapped inside the button.
   final Widget child;

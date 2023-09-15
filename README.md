@@ -33,7 +33,7 @@ dependencies:
 | `borderRadius` |  `Double`  | `20` | The border radius of the button, defaults to 20 |
 | `progress` |  `bool`  | `false` | Whether the progress indicator is required or not, defaults to false |
 | `disabled` |  `bool`  | `false` | Disables the button, defaults to false |
-| `onTap` |  `Function`  |  | Button press handler, required* |
+| `onTap` |  `Function(void Function() finish)`  |  | Button tap handler with `finish` callback to reset the state of progress and animation when called, required* |
 | `child` |  `Widget`  |  | Inner content for the button, required* |
 
 ### Usage
