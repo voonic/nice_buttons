@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:nice_buttons/nice_buttons.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:nice_buttons/nice_buttons.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -15,22 +18,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // This is the theme of your application.
         //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a blue toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
         // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
       ),
-      home: MyHomePage(title: 'Nice Buttons Demo'),
+      home: const MyHomePage(title: 'Nice Buttons Demo'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -41,10 +51,10 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String? title;
+  final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -58,9 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        // TRY THIS: Try changing the color here to a specific color (to
+        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+        // change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title!),
+        title: Text(widget.title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -87,61 +101,61 @@ class _MyHomePageState extends State<MyHomePage> {
               progress: true,
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
-                print('On tap called');
-                Timer(Duration(seconds: 5), () {
+                debugPrint('On tap called');
+                Timer(const Duration(seconds: 5), () {
                   finish();
                 });
               },
-              child: Text(
+              child: const Text(
                 'With Progress',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
-            Container(width: double.infinity, height: 30),
+            const SizedBox(width: double.infinity, height: 30),
             NiceButtons(
               stretch: false,
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
-                print('On tap called');
+                debugPrint('On tap called');
               },
-              child: Text(
+              child: const Text(
                 'Nice Buttons',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
-            Container(width: double.infinity, height: 30),
+            const SizedBox(width: double.infinity, height: 30),
             NiceButtons(
               stretch: true,
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
-                print('On tap called');
+                debugPrint('On tap called');
               },
-              child: Text(
+              child: const Text(
                 'Full Width',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
-            Container(width: double.infinity, height: 30),
+            const SizedBox(width: double.infinity, height: 30),
             NiceButtons(
               stretch: false,
               borderRadius: 30,
               gradientOrientation: GradientOrientation.Horizontal,
               onTap: (finish) {
-                print('On tap called');
+                debugPrint('On tap called');
               },
-              child: Text(
+              child: const Text(
                 '3D Pill',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
-            Container(width: double.infinity, height: 30),
+            const SizedBox(width: double.infinity, height: 30),
             NiceButtons(
               stretch: false,
               gradientOrientation: GradientOrientation.Vertical,
               onTap: (finish) {
-                print('On tap called');
+                debugPrint('On tap called');
               },
-              child: Text(
+              child: const Text(
                 'Vertical Gradient',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
